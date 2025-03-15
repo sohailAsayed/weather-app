@@ -3,7 +3,7 @@
         <form class="example-form d-flex align-item-center">
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Search City</mat-label>
-                <input matInput placeholder="" (input)="cityNameChanged($event)">
+                <input matInput [value]="searchedCity()" placeholder="" (input)="cityNameChanged($event)">
 
             </mat-form-field>
             &nbsp; &nbsp;

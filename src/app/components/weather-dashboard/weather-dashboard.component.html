@@ -2,7 +2,12 @@
     <div class="col-12 d-flex justify-content-center">
         <app-search-city (selectedCity)="searchCity($event)"></app-search-city>
     </div>
+    <div class="col-12">
+        <app-weather-display *ngIf="showCardDetails" [currentWeather]="currentCityDetails"></app-weather-display>
+    </div>
     <div class="col-12 mt-3">
-        <app-map></app-map>
+        <div class="mapComponent">
+            <app-map (latLongSelected)="updateDetailsViaLatLon($event)"></app-map>
+        </div>
     </div>
 </div>

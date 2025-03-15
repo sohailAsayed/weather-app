@@ -1,2 +1,19 @@
-<mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[9]" [center]="[-74.5, 40]">
+<!-- <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[9]" [center]="[-74.5, 40]">
+</mgl-map> -->
+<!-- <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11.15]" [center]="[-77.04, 38.907]"
+    [cursorStyle]="cursorStyle">
+    <mgl-geojson-source id="points" [data]="points"></mgl-geojson-source>
+    <mgl-layer id="points" source="points" type="symbol" [layout]="{
+    'icon-image': '{icon}-15',
+    'icon-allow-overlap': true
+  }" (click)="onClick($event)" (mouseEnter)="cursorStyle = 'pointer'" (mouseLeave)="cursorStyle = ''"></mgl-layer>
+    <mgl-popup *ngIf="selectedPoint" [lngLat]="selectedPoint.geometry.coordinates" (close)="selectedPoint = null">
+        <span [innerHTML]="selectedPoint.properties.description"></span>
+    </mgl-popup>
+</mgl-map> -->
+<mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[12]" [center]="[longitude(), latitude()]"
+    (mapClick)="onMapClick($event)">
+    @if(longitude() && latitude()){
+    <mgl-marker [lngLat]="[longitude(), latitude()]"></mgl-marker>
+    }
 </mgl-map>

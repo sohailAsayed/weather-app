@@ -1,25 +1,24 @@
 import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatButtonModule } from '@angular/material/button';
+
 import { output } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { selectLocationName } from '../../store/selectors/location.selectors';
 @Component({
   selector: 'app-search-city',
-  imports: [
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatSlideToggleModule,
-    MatButtonModule,
-  ],
+  standalone: false,
   templateUrl: './search-city.component.html',
   styleUrl: './search-city.component.scss',
 })
 export class SearchCityComponent {
+  constructor(private store: Store) {
+    this.store
+      .pipe(select(selectLocationName))
+      .subscribe((res: string | null) => {
+        if (res) {
+          this.searchedCity.set(res);
+        }
+      });
+  }
   cityNameChanged($event: any) {
     // searchedCity
     this.searchedCity.set($event?.target?.value);

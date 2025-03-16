@@ -38,7 +38,28 @@
 .red {
   color: red;
 }
-
+.justify-content-evenly {
+  justify-content: space-evenly;
+}
+.cursorInitial {
+  cursor: initial;
+}
+.blue-color {
+  color: #2caffe;
+  font-weight: 600;
+}
+.currentTemperatureSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.increaseIconSize {
+  transform: scale(1.5);
+}
+.largeText {
+  font-size: 48px;
+  line-height: 50px;
+}
 @media only screen and (max-height: 768px), screen and (max-width: 768px) {
   .container {
     justify-content: normal;

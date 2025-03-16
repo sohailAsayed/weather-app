@@ -3,6 +3,7 @@ import { Component, signal } from '@angular/core';
 import { output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { selectLocationName } from '../../store/selectors/location.selectors';
+import { NotificationService } from '../../services/notification.service';
 @Component({
   selector: 'app-search-city',
   standalone: false,
@@ -10,7 +11,10 @@ import { selectLocationName } from '../../store/selectors/location.selectors';
   styleUrl: './search-city.component.scss',
 })
 export class SearchCityComponent {
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private notificationService: NotificationService
+  ) {
     this.store
       .pipe(select(selectLocationName))
       .subscribe((res: string | null) => {
@@ -28,8 +32,18 @@ export class SearchCityComponent {
   selectedCity = output<any[]>();
   updateTemperatureType() {
     this.isCelsius.update((value) => (value = !value));
+    this.notificationService.success(
+      `Temperature unit changed to ${
+        this.isCelsius() ? 'Celsius' : 'Fahrenheit'
+      }`
+    );
+    this.searchCity(true);
   }
-  searchCity() {
-    this.selectedCity.emit([this.searchedCity(), this.isCelsius()]);
+  searchCity(metricChanged?: boolean) {
+    const result = [this.searchedCity(), this.isCelsius()];
+    if (metricChanged) {
+      result.push(true);
+    }
+    this.selectedCity.emit(result);
   }
 }

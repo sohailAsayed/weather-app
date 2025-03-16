@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 // @import "~mapbox-gl/dist/mapbox-gl.css";
+@use "@angular/material" as mat;
 html,
 body {
   height: 100%;
@@ -8,4 +9,40 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.success-snackbar {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: white;
+  padding: 16px;
+}
+
+.warning-snackbar {
+  background-color: #ffeb3b;
+  color: black;
+  padding: 16px;
+}
+
+.info-snackbar {
+  background-color: #2196f3;
+  color: white;
+  padding: 16px;
+}
+.mdc-snackbar__label {
+  padding: 0px !important;
+}
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.snack-bar-overrides(
+    (
+      container-color: none,
+      supporting-text-color: white,
+      supporting-text-weight: 500,
+    )
+  );
 }

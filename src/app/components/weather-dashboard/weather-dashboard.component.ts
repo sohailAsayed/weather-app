@@ -4,6 +4,7 @@ import { HttpService } from '../../services/http.service';
 import { WeatherService } from '../../services/weather.service';
 import * as LocationActions from '../../store/actions/location.actions';
 import { selectLocationName } from '../../store/selectors/location.selectors';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-weather-dashboard',
@@ -17,25 +18,37 @@ export class WeatherDashboardComponent {
     return Object.keys(this.currentCityDetails)?.length;
   }
   cityName = signal('');
-  metric = signal(false);
+  metric = signal(true);
   currentCityDetails: any = {};
-  foreCastList = [];
+  foreCastList = { list: [] };
+  onlyMetricChanged: boolean = false;
   constructor(
     private httpService: HttpService,
     private weatherService: WeatherService,
-    private store: Store
+    private store: Store,
+    private notificationService: NotificationService
   ) {
     this.store
       .pipe(select(selectLocationName))
       .subscribe((res: string | null) => {
         if (res) {
           this.cityName.set(res);
+
+          // By default when the component is loaded
+          // we set the default values
+          this.searchCityApiCall();
         }
       });
   }
   searchCity(cityNameAndMetrics: any[]): void {
     this.cityName.set(cityNameAndMetrics[0]);
     this.metric.set(cityNameAndMetrics[1]);
+    if (cityNameAndMetrics?.[2]) {
+      this.onlyMetricChanged = true;
+    }
+    this.searchCityApiCall();
+  }
+  searchCityApiCall() {
     const url = this.weatherService.getDetailsViaCityName(
       this.cityName(),
       this.metric()
@@ -52,9 +65,20 @@ export class WeatherDashboardComponent {
         this.store.dispatch(
           LocationActions.updateLocationName({ locationName: this.cityName() })
         );
+        if (this.onlyMetricChanged) {
+          this.onlyMetricChanged = false;
+        } else {
+          this.notificationService.success(
+            `Displaying weather for ${this.cityName()}`
+          );
+        }
+
         this.foreCastDetails();
       },
       (err) => {
+        this.notificationService.error(
+          'City not found. Please check the spelling and try again.'
+        );
         console.error('Error', err);
       }
     );
@@ -67,6 +91,7 @@ export class WeatherDashboardComponent {
     );
     this.httpService.get(url).subscribe(
       (res: any) => {
+        this.foreCastList = { list: [] };
         this.foreCastList = res;
       },
       (err) => {

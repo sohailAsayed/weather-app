@@ -23,6 +23,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NotificationService } from './services/notification.service';
+import { CustomSnackbarComponent } from './components/notification/custom-snackbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MapDisplayComponent,
     WeatherDashboardComponent,
     WeatherDisplayComponent,
+    CustomSnackbarComponent,
   ],
   imports: [
     FormsModule,
@@ -51,8 +55,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     }),
     StoreModule.forRoot({ location: fromLocation.reducer }),
     HighchartsChartModule,
+    MatSnackBarModule,
   ],
-  providers: [WeatherService, HttpService],
+  providers: [WeatherService, HttpService, NotificationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

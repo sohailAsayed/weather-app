@@ -3,31 +3,43 @@
   <mat-card class="grid-item weatherDetailsCard" appearance="outlined">
     <mat-card-content>
       <div *ngIf="loaded" class="content">
-        <div class="d-flex mt-3">
-          <div>
-            <img [src]="iconUrl" alt="Current weather icon" />
-            <p [ngClass]="{
-              blue: currentWeather().main?.temp < 5,
-              yellow: 5 < currentWeather().main?.temp && currentWeather().main?.temp < 15,
-              orange: 15 < currentWeather().main?.temp && currentWeather().main?.temp < 25,
-              red: currentWeather().main?.temp > 25
-            }">
-              {{ currentWeather().main?.temp }}&deg;C
+        <div class="d-flex justify-content-evenly mt-3">
+          <div class="currentTemperatureSection">
+            <!-- <img [src]="iconUrl" alt="Current weather icon" /> -->
+            <p [ngClass]="getTemperatureClass()" class="largeText mb-1">
+              <mat-icon matTooltip="Current Temperature"
+                class="cursorInitial align-middle increaseIconSize">thermostat</mat-icon> {{
+              currentWeather().main?.temp }} &deg;
+              {{isCelsius() ? 'C' : 'F'}}
             </p>
-            <p>
-              {{ currentWeather().weather[0].main }}:
-              {{ currentWeather().weather[0].description }}
+            <p class="blue-color text-center">
+              <mat-icon matTooltip="Current Weather" class="align-middle cursorInitial">wb_cloudy</mat-icon> {{
+              currentWeather().weather[0].main }}
+              <!-- {{ currentWeather().weather[0].description }} -->
             </p>
           </div>
           <mat-divider [vertical]="true"></mat-divider>
           <div>
-            <p style="margin-top: 10px">
-              Feels like: {{ currentWeather()?.main?.feels_like }}&deg;C
+            <p style="margin-top: 10px" class="blue-color">
+              <mat-icon matTooltip="Feels like" class="cursorInitial">thermostat</mat-icon> &nbsp;
+              {{ currentWeather()?.main?.feels_like }} &deg;{{ isCelsius() ? 'C' : 'F' }}
             </p>
-            <p>Pressure: {{ currentWeather().main.pressure }} hPa</p>
-            <p>Humidity: {{ currentWeather().main.humidity }}%</p>
-            <p>Wind: {{ currentWeather().wind.speed }} km/h</p>
-            <p>Clouds: {{ currentWeather().clouds.all }}%</p>
+            <p class="blue-color">
+              <mat-icon matTooltip="Pressure" class="cursorInitial">speed</mat-icon> &nbsp;
+              {{ currentWeather().main.pressure }} hPa
+            </p>
+            <p class="blue-color">
+              <mat-icon matTooltip="Humidity" class="cursorInitial">water_drop</mat-icon> &nbsp;
+              {{ currentWeather().main.humidity }}%
+            </p>
+            <p class="blue-color">
+              <mat-icon matTooltip="Wind" class="cursorInitial">air</mat-icon> &nbsp;
+              {{ currentWeather().wind.speed }} km/h
+            </p>
+            <p class="blue-color">
+              <mat-icon matTooltip="Clouds" class="cursorInitial">cloud</mat-icon> &nbsp;
+              {{ currentWeather().clouds.all }}%
+            </p>
           </div>
         </div>
       </div>

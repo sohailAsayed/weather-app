@@ -2,7 +2,7 @@
     <div class="grid-container">
         <div class="element-two-thirds">
             <h6 *ngIf="showCardDetails">
-                Current weather in <b>{{ currentCityDetails?.name }}</b>
+                Current weather in <b class="blue">{{ currentCityDetails?.name }}</b>
             </h6>
         </div>
         <div class="element-one-third">
@@ -13,8 +13,8 @@
         <app-map (latLongSelected)="updateDetailsViaLatLon($event)"></app-map>
     </div>
     <div>
-        <app-weather-display *ngIf="showCardDetails" [currentWeather]="currentCityDetails"
-            [foreCastList]="foreCastList"></app-weather-display>
+        <app-weather-display *ngIf="showCardDetails" [currentWeather]="currentCityDetails" [foreCastList]="foreCastList"
+            [isCelsius]="metric()"></app-weather-display>
     </div>
 
 </div>

@@ -8,9 +8,9 @@ export interface LocationState {
 }
 
 export const initialState: LocationState = {
-  latitude: 12.9762, // Provide a default number value
-  longitude: 77.6033, // Provide a default number value
-  locationName: 'Bengaluru',
+  latitude: 40.7143, // Provide a default number value
+  longitude: -74.006, // Provide a default number value
+  locationName: 'New York',
 };
 
 const locationReducer = createReducer(

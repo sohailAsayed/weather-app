@@ -14,6 +14,8 @@
 <mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[12]" [center]="[longitude(), latitude()]"
     (mapClick)="onMapClick($event)">
     @if(longitude() && latitude()){
-    <mgl-marker [lngLat]="[longitude(), latitude()]"></mgl-marker>
+    <div matTooltip="Info about the action">
+        <mgl-marker [lngLat]="[longitude(), latitude()]"></mgl-marker>
+    </div>
     }
 </mgl-map>

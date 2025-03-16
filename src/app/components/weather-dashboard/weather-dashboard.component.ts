@@ -95,6 +95,7 @@ export class WeatherDashboardComponent {
         this.foreCastList = res;
       },
       (err) => {
+        this.notificationService.error(err);
         console.error('Error', err);
       }
     );
@@ -115,6 +116,7 @@ export class WeatherDashboardComponent {
         );
       },
       (err) => {
+        this.notificationService.error(err);
         console.error('Error', err);
       }
     );

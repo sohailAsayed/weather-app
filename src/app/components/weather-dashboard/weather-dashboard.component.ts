@@ -113,7 +113,6 @@ export class WeatherDashboardComponent {
         this.store.dispatch(
           LocationActions.updateLocationName({ locationName: res?.name })
         );
-        console.log('latLong', res);
       },
       (err) => {
         console.error('Error', err);

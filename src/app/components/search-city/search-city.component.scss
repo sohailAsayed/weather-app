@@ -8,5 +8,40 @@
   width: 100%;
 }
 .searchContainer {
-  width: 500px;
+  width: 565px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+::ng-deep {
+  // .mdc-text-field--filled:not(.mdc-text-field--disabled),
+  // .mdc-text-field--filled:not(.mdc-text-field--disabled):hover {
+  //   background-color: white !important;
+  // }
+  .mdc-label {
+    width: 30px;
+  }
+}
+input[type="text"] {
+  padding: 15px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 18px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+input[type="text"]::placeholder {
+  color: #aaa;
+}
+.cursor-pointer {
+  cursor: pointer;
 }

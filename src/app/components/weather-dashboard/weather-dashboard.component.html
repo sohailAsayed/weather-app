@@ -1,13 +1,20 @@
-<div class="w-100 row mt-2">
-    <div class="col-12 d-flex justify-content-center">
-        <app-search-city (selectedCity)="searchCity($event)"></app-search-city>
-    </div>
-    <div class="col-12">
-        <app-weather-display *ngIf="showCardDetails" [currentWeather]="currentCityDetails"></app-weather-display>
-    </div>
-    <div class="col-12 mt-3">
-        <div class="mapComponent">
-            <app-map (latLongSelected)="updateDetailsViaLatLon($event)"></app-map>
+<div class="containerBox">
+    <div class="grid-container">
+        <div class="element-two-thirds">
+            <h6 *ngIf="showCardDetails">
+                Current weather in <b>{{ currentCityDetails?.name }}</b>
+            </h6>
+        </div>
+        <div class="element-one-third">
+            <app-search-city (selectedCity)="searchCity($event)"></app-search-city>
         </div>
     </div>
+    <div class="mapComponent">
+        <app-map (latLongSelected)="updateDetailsViaLatLon($event)"></app-map>
+    </div>
+    <div>
+        <app-weather-display *ngIf="showCardDetails" [currentWeather]="currentCityDetails"
+            [foreCastList]="foreCastList"></app-weather-display>
+    </div>
+
 </div>

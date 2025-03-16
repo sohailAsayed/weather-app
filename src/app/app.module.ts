@@ -20,6 +20,9 @@ import { StoreModule } from '@ngrx/store';
 import * as fromLocation from './store/reducers/location.reducer';
 import { WeatherDisplayComponent } from './components/weather-display/weather-display.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,11 +43,14 @@ import { MatDividerModule } from '@angular/material/divider';
     AppRoutingModule,
     HttpClientModule,
     MatDividerModule,
+    MatIconModule,
+    MatTooltipModule,
     NgxMapboxGLModule.withConfig({
       accessToken:
         'pk.eyJ1Ijoid3lra3NzIiwiYSI6ImNqMjR6aTdmdzAwNHMzMnBvbjBucjlqNm8ifQ.6GjGpofWBVaIuSnhdXQb5w',
     }),
     StoreModule.forRoot({ location: fromLocation.reducer }),
+    HighchartsChartModule,
   ],
   providers: [WeatherService, HttpService],
   bootstrap: [AppComponent],

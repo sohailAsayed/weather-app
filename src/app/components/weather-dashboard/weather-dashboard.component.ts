@@ -18,7 +18,8 @@ export class WeatherDashboardComponent {
   }
   cityName = signal('');
   metric = signal(false);
-  currentCityDetails = {};
+  currentCityDetails: any = {};
+  foreCastList = [];
   constructor(
     private httpService: HttpService,
     private weatherService: WeatherService,
@@ -51,7 +52,22 @@ export class WeatherDashboardComponent {
         this.store.dispatch(
           LocationActions.updateLocationName({ locationName: this.cityName() })
         );
-        console.log('Result', res);
+        this.foreCastDetails();
+      },
+      (err) => {
+        console.error('Error', err);
+      }
+    );
+  }
+  foreCastDetails() {
+    const url = this.weatherService.getDetailsViaCityName(
+      this.cityName(),
+      this.metric(),
+      true
+    );
+    this.httpService.get(url).subscribe(
+      (res: any) => {
+        this.foreCastList = res;
       },
       (err) => {
         console.error('Error', err);
@@ -68,6 +84,7 @@ export class WeatherDashboardComponent {
     this.httpService.get(url).subscribe(
       (res: any) => {
         this.currentCityDetails = res;
+        this.foreCastDetails();
         this.store.dispatch(
           LocationActions.updateLocationName({ locationName: res?.name })
         );

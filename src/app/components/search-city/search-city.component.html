@@ -1,17 +1,28 @@
-<mat-card appearance="outlined" class="searchContainer">
+<!-- <mat-card appearance="outlined" class="searchContainer">
     <mat-card-content>
-        <form class="example-form d-flex align-item-center">
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Search City</mat-label>
-                <input matInput [value]="searchedCity()" placeholder="" (input)="cityNameChanged($event)">
+        
 
-            </mat-form-field>
-            &nbsp; &nbsp;
-            <mat-slide-toggle value="isCelsius()" (toggleChange)="updateTemperatureType()">
-                {{isCelsius() ? 'Celsius' : 'Fahrenheit'}}</mat-slide-toggle>
-
-
-        </form>
-        <button mat-flat-button (click)="searchCity()">Search</button>
     </mat-card-content>
-</mat-card>
+</mat-card> -->
+
+
+<div class="searchContainer">
+    <!-- <form class="example-form d-flex align-item-end"> -->
+    <!-- <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Search City</mat-label>
+            <input matInput>
+
+        </mat-form-field> -->
+    <div class="d-inline-flex align-items-center">
+        <input type="text" [value]="searchedCity()" (input)="cityNameChanged($event)" placeholder="Enter City Name">
+        &nbsp;&nbsp; <mat-icon matTooltip="Search" class="cursor-pointer" (click)="searchCity()">search</mat-icon>
+    </div>
+    <div class="ms-4 d-inline-flex">
+        <mat-slide-toggle matTooltip="Change Units" value="isCelsius()" (toggleChange)="updateTemperatureType()">
+            {{isCelsius() ? ' Celsius' : ' Fahrenheit'}}
+        </mat-slide-toggle>
+    </div>
+
+    <!-- <button mat-flat-button (click)="searchCity()">Search</button> -->
+    <!-- </form> -->
+</div>

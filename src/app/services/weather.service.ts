@@ -7,10 +7,16 @@ import { environment } from '../environments/environment';
 export class WeatherService {
   constructor() {}
 
-  getDetailsViaCityName(city: string | null, isCelsius: boolean) {
-    const url = `${environment.city_wise_search}?q=${city}&appid=${
-      environment.api_key
-    }&units=${isCelsius ? 'metric' : 'imperial'}`;
+  getDetailsViaCityName(
+    city: string | null,
+    isCelsius: boolean,
+    foreCast?: boolean
+  ) {
+    const url = `${
+      foreCast ? environment.forecast_api : environment.city_wise_search
+    }?q=${city}&appid=${environment.api_key}&units=${
+      isCelsius ? 'metric' : 'imperial'
+    }`;
     return url;
   }
   getDetailsViaLatLong(

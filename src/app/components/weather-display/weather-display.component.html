@@ -1,38 +1,51 @@
-<div class="container">
-  <div class="mat-typography title">
-    <h1>
-      Current weather in <b>{{ currentWeather()?.name }}</b>
-    </h1>
-  </div>
-  <mat-card class="main">
-    <mat-card-content>
+<div class="grid-container">
 
+  <mat-card class="grid-item weatherDetailsCard" appearance="outlined">
+    <mat-card-content>
       <div *ngIf="loaded" class="content">
-        <div>
-          <img [src]="iconUrl" alt="Current weather icon" />
-          <p [ngClass]="{
+        <div class="d-flex mt-3">
+          <div>
+            <img [src]="iconUrl" alt="Current weather icon" />
+            <p [ngClass]="{
               blue: currentWeather().main?.temp < 5,
               yellow: 5 < currentWeather().main?.temp && currentWeather().main?.temp < 15,
               orange: 15 < currentWeather().main?.temp && currentWeather().main?.temp < 25,
               red: currentWeather().main?.temp > 25
             }">
-            {{ currentWeather().main?.temp }}&deg;C
-          </p>
-          <p>
-            {{ currentWeather().weather[0].main }}:
-            {{ currentWeather().weather[0].description }}
-          </p>
+              {{ currentWeather().main?.temp }}&deg;C
+            </p>
+            <p>
+              {{ currentWeather().weather[0].main }}:
+              {{ currentWeather().weather[0].description }}
+            </p>
+          </div>
+          <mat-divider [vertical]="true"></mat-divider>
+          <div>
+            <p style="margin-top: 10px">
+              Feels like: {{ currentWeather()?.main?.feels_like }}&deg;C
+            </p>
+            <p>Pressure: {{ currentWeather().main.pressure }} hPa</p>
+            <p>Humidity: {{ currentWeather().main.humidity }}%</p>
+            <p>Wind: {{ currentWeather().wind.speed }} km/h</p>
+            <p>Clouds: {{ currentWeather().clouds.all }}%</p>
+          </div>
         </div>
-        <mat-divider [vertical]="true"></mat-divider>
-        <div>
-          <p style="margin-top: 10px">
-            Feels like: {{ currentWeather()?.main?.feels_like }}&deg;C
-          </p>
-          <p>Pressure: {{ currentWeather().main.pressure }} hPa</p>
-          <p>Humidity: {{ currentWeather().main.humidity }}%</p>
-          <p>Wind: {{ currentWeather().wind.speed }} km/h</p>
-          <p>Clouds: {{ currentWeather().clouds.all }}%</p>
-        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="grid-item weatherDetailsCard" appearance="outlined">
+    <mat-card-content>
+      <div class="weather-chart">
+        <highcharts-chart [Highcharts]="Highcharts" [options]="temperatureChartOptions"
+          style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="grid-item weatherDetailsCard" appearance="outlined">
+    <mat-card-content>
+      <div class="weather-chart">
+        <highcharts-chart [Highcharts]="Highcharts" [options]="windSpeedChartOptions"
+          style="width: 100%; height: 400px; display: block;"></highcharts-chart>
       </div>
     </mat-card-content>
   </mat-card>

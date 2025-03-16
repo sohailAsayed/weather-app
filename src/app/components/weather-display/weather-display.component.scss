@@ -1,0 +1,52 @@
+.weatherDetailsCard {
+  // -webkit-box-shadow: 2px 17px 22px 2px rgba(0, 0, 0, 0.51);
+  // -moz-box-shadow: 2px 17px 22px 2px rgba(0, 0, 0, 0.51);
+  // box-shadow: 2px 17px 22px 2px rgba(0, 0, 0, 0.51);
+  -webkit-box-shadow: -1px 2px 9px -2px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: -1px 2px 9px -2px rgba(0, 0, 0, 0.55);
+  box-shadow: -1px 2px 9px -2px rgba(0, 0, 0, 0.55);
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Creates three equal-width columns */
+  /* Optional: Add gap between grid items */
+  grid-gap: 10px;
+  padding: 10px;
+  height: 30vh;
+}
+
+.grid-item {
+  /* Optional: You can add styles to individual grid items here */
+  /* For example: */
+  /* background-color: #f0f0f0; */
+  /* padding: 20px; */
+  /* text-align: center; */
+}
+
+.blue {
+  color: royalblue;
+}
+
+.yellow {
+  color: sandybrown;
+}
+
+.orange {
+  color: darkorange;
+}
+
+.red {
+  color: red;
+}
+
+@media only screen and (max-height: 768px), screen and (max-width: 768px) {
+  .container {
+    justify-content: normal;
+  }
+
+  .main {
+    width: 100vw;
+    padding-top: 2em;
+    padding-bottom: 1em;
+  }
+}

@@ -14,7 +14,8 @@
 
         </mat-form-field> -->
     <div class="d-inline-flex align-items-center">
-        <input type="text" [value]="searchedCity()" (input)="cityNameChanged($event)" placeholder="Enter City Name">
+        <input type="text" [value]="searchedCity()" (input)="cityNameChanged($event)" (keydown.enter)="searchCity()"
+            placeholder="Enter City Name">
         &nbsp;&nbsp; <mat-icon matTooltip="Search" class="cursor-pointer" (click)="searchCity()">search</mat-icon>
     </div>
     <div class="ms-4 d-inline-flex">
